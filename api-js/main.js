@@ -19,7 +19,7 @@
            console.log(data[element].name)}
 
        } catch (error) {
-           console.log(error.response.body);
+           console.log(error.response);
        }
      })();
 
