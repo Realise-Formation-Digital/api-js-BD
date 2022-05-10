@@ -1,54 +1,28 @@
-(async () => {
-   try {
-      const response = await axios.get('https://api.punkapi.com/v2/beers/1')
-          console.log(response.data[0].image_url)
-          console.log(response.data[0].name)
- insertText(response.data[0].name, response.data[0].tagline, response.data[0].image_url)
- } catch (error) {
- console.log(error.response);
- }
-  })();
 
-   (async () => {
-       try {
-         const response = await axios.get('https://api.punkapi.com/v2/beers')
-          console.log(response)
-          console.log(response.data[0].name)
-            insertText(response.data[0].name, response.data[0].tagline, response.data[0].image_url)
-         for (const element of response) {
-           console.log(data[element].name)}
-
-       } catch (error) {
-           console.log(error.response);
-       }
-     })();
-
-   function insertText(nameBeer, textBeer, imageBeer){
-       document.getElementById("name-beer").innerText = nameBeer
-       document.getElementById("beer-description").innerText = textBeer
-       document.getElementById("image-beer").innerHTML = imageEl
-       imageEl.innerHTML =   `<img src=${imageBeer}>
-       `
-
-   }
-
+let card = document.getElementById("card")
+let nameBr = ""
+let imageBr =""
+let taglineBr =""
+let descriptionBr =""
 async function getBeers() {
     try {
-      const response = await axios.get('https://api.punkapi.com/v2/beers')
-      console.log(response)
-       console.log(response.data[0].name)
-         insertText(response.data[0].name, response.data[0].tagline, response.data[0].image_url)
-      for (const response of element.data) {
-        console.log(element.name)
+      const response = await axios.get('https://api.punkapi.com/v2/beers');
+      for(const element of response.data){
+        console.log(response.data)
+        nameBr = element.name
+        imageBr = element.image_url
+        taglineBr = element.tagline
+        descriptionBr = element.description
+        card.innerHTML +=
+        `<p> `+nameBr+`</p>
+        <img src = "`+imageBr+`"</img>
+        <p> `+taglineBr+`</p>
+        <p>`+descriptionBr+`</p>`
       }
-  
-    } catch (error) {
+
+    }  
+    catch (error) {
       console.log(error);
     }
-  }
-  
-  await getBeers()
-
-
-
-
+}
+await getBeers()
